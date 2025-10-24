@@ -58,8 +58,6 @@
   }
 }
 
-/* ian is gay asf- if you saw this hi ian*/
-
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -75,7 +73,6 @@
   animation: fade-in 0.3s ease-out forwards;
 }
 
-/* Enhanced glassmorphism with underglow */
 .glass-card {
   background: linear-gradient(
     135deg,
@@ -90,7 +87,6 @@
     inset 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
-/* Magnetic underglow effect */
 .underglow {
   position: relative;
 }

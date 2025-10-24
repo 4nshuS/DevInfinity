@@ -21,7 +21,6 @@ export default function ProductCard({ product, index }) {
       >
         <div className="bg-black/20 backdrop-blur-sm border border-white/5 rounded-2xl p-6 h-full hover:border-cyan-400/20 transition-all duration-300 group">
           <div className="flex flex-col h-full">
-            {/* Product Image */}
             <div className="w-16 h-16 mb-4 relative rounded-xl overflow-hidden bg-gray-800/50">
               {product.starImage ? (
                 <Image
@@ -56,7 +55,6 @@ export default function ProductCard({ product, index }) {
         </div>
       </motion.div>
 
-      {/* Product Modal */}
       <ProductModal 
         product={product} 
         isOpen={showModal} 

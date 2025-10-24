@@ -23,7 +23,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
     setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
   };
 
-  // Swipe handlers
   const handleTouchStart = (e) => {
     setTouchStart(e.targetTouches[0].clientX);
   };
@@ -50,7 +49,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
     setTouchEnd(0);
   };
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isOpen) return;
@@ -64,7 +62,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
   }, [isOpen, currentImageIndex]);
 
   const handleBuyClick = () => {
-    // Get Stripe payment link from environment variable
     const stripePaymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
     
     if (stripePaymentLink) {
@@ -87,10 +84,8 @@ export default function ProductModal({ product, isOpen, onClose }) {
             transition={{ duration: 0.15 }}
             onClick={onClose}
           >
-            {/* Backdrop */}
             <div className="absolute inset-0 bg-black/30 backdrop-blur-md" />
             
-            {/* Modal Container */}
             <motion.div
               className="relative w-full max-w-5xl bg-black/30 backdrop-blur-2xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -99,7 +94,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
               transition={{ type: 'spring', duration: 0.3, bounce: 0.25 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
               <button
                 onClick={onClose}
                 className="absolute top-5 right-5 z-20 p-2 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm transition-all duration-200 border border-white/10"
@@ -107,12 +101,9 @@ export default function ProductModal({ product, isOpen, onClose }) {
                 <X size={18} className="text-white/80" />
               </button>
 
-              {/* Content */}
               <div className="flex flex-col md:flex-row max-h-[85vh]">
-                {/* Left - Images */}
                 <div className="w-full md:w-1/2 bg-black/20 p-6 md:p-8 flex items-center justify-center">
                   <div className="w-full max-w-md">
-                    {/* Main Image */}
                     <div 
                       className="relative aspect-square rounded-2xl overflow-hidden bg-black/40 mb-4 cursor-pointer group border border-white/5"
                       onClick={() => setSelectedImage(allImages[currentImageIndex])}
@@ -129,7 +120,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
                         />
                       )}
                       
-                      {/* Navigation Arrows */}
                       {allImages.length > 1 && (
                         <>
                           <motion.button
@@ -151,7 +141,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
                         </>
                       )}
 
-                      {/* Image Counter Badge */}
                       {allImages.length > 1 && (
                         <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white/90 text-xs font-medium border border-white/10">
                           {currentImageIndex + 1} / {allImages.length}
@@ -159,7 +148,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
                       )}
                     </div>
 
-                    {/* Dot Indicators */}
                     {allImages.length > 1 && (
                       <div className="flex items-center justify-center gap-2">
                         {allImages.map((_, idx) => (
@@ -180,10 +168,8 @@ export default function ProductModal({ product, isOpen, onClose }) {
                   </div>
                 </div>
 
-                {/* Right - Content */}
                 <div className="w-full md:w-1/2 p-6 md:p-8 overflow-y-auto custom-scrollbar">
                   <div className="space-y-6">
-                    {/* Title */}
                     <div>
                       <motion.h2 
                         className="text-2xl md:text-3xl font-bold text-white/95 mb-2"
@@ -201,7 +187,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
                       />
                     </div>
 
-                    {/* Description */}
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -215,7 +200,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
                       </p>
                     </motion.div>
 
-                    {/* Documentation */}
                     {product.documentation && (
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
@@ -237,7 +221,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
                       </motion.div>
                     )}
 
-                    {/* Credits */}
                     {product.credits && (
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
@@ -275,8 +258,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Full Image Lightbox */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
@@ -307,7 +288,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
                 />
               </div>
 
-              {/* Navigation in Lightbox */}
               {allImages.length > 1 && (
                 <>
                   <motion.button
@@ -336,8 +316,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
                   </motion.button>
                 </>
               )}
-
-              {/* Close Button */}
               <motion.button
                 onClick={() => setSelectedImage(null)}
                 className="absolute top-4 right-4 p-3 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm transition-all duration-200 border border-white/10"
@@ -347,7 +325,6 @@ export default function ProductModal({ product, isOpen, onClose }) {
                 <X size={24} className="text-white/90" />
               </motion.button>
 
-              {/* Image Counter */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-sm text-white/90 text-sm font-medium border border-white/10">
                 {currentImageIndex + 1} / {allImages.length}
               </div>
